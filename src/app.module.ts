@@ -8,8 +8,9 @@ import { NutrionController } from './nutrion/nutrion.controller';
 import { TrainingModule } from './training/training.module';
 
 @Module({
-  imports: [UserModule, TrainingModule, NutrionModule],
+  // imports: [UserModule, TrainingModule, NutrionModule],
   controllers: [AppController, NutrionController],
-  providers: [AppService, TrainingService],
+  providers: [ TrainingService],
+  export: [TrainingService],
 })
 export class AppModule {}

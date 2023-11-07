@@ -4,8 +4,9 @@ import { TrainingService } from './training.service';
 import { UserService } from 'src/user/user.service';
 
 @Module({
-  imports: [UserService],
+  // imports: [UserService],
   controllers: [TrainingController],
   providers: [TrainingService],
+  exports: [TrainingService],
 })
 export class TrainingModule {}
