@@ -11,7 +11,7 @@ import { UserController } from './user/user.controller';
 @Module({
   // imports: [UserModule, TrainingModule, NutrionModule],
   controllers: [UserController],
-  providers: [ TrainingService],
-  export: [TrainingService],
+  providers: [TrainingService],
+  exports: [TrainingService],
 })
 export class AppModule {}
