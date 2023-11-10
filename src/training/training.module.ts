@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TrainingController } from './training.controller';
 import { TrainingService } from './training.service';
-import { UserService } from 'src/user/user.service';
+import { UserModule } from 'src/user/user.module';
 
 @Module({
-  // imports: [UserService],
+  imports: [UserModule],
   controllers: [TrainingController],
   providers: [TrainingService],
   exports: [TrainingService],

@@ -10,7 +10,7 @@ import {
 import { TrainingService } from './training.service';
 import { TrainingDto } from './dto';
 import { Training } from './type';
-import { IdDto, NameDto } from 'src/common/decorators';
+import { IdDto } from 'src/common/decorators';
 
 @Controller('training')
 export class TrainingController {
@@ -27,22 +27,12 @@ export class TrainingController {
 
   @Get()
   getAllTraining(): Training[] {
-    return this.trainingService
-      .getTraining()
-      .filter((training) => training.active);
-  }
-  @Get(':id')
-  getTrainigById(@Param() params: IdDto): Training {
-    const { id } = params;
-    return this.trainingService.getSingleTraining(params.id);
+    return this.trainingService.getTraining();
   }
 
-  @Get(':name/name')
-  getTrainingByName(@Param() params: NameDto): Training[] {
-    const { name } = params;
-    return this.trainingService
-      .getTraining()
-      .filter((training) => training.name === name);
+  @Get(':id')
+  getTrainingById(@Param() params: IdDto): Training {
+    return this.trainingService.getSingleTraining(params.id);
   }
 
   @Put(':id')

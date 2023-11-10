@@ -1,14 +1,17 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import { Training } from './type';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class TrainingService {
   private training: Training[] = [];
-  trainingIndex: number;
+
+  constructor(private readonly userService: UserService) {}
 
   insertTraining(description: string, userId: string): string {
     const trainingId = uuidv4();
+    this.userService.findUser(userId);
     this.training.push(new Training(trainingId, description, userId));
     return trainingId;
   }
@@ -27,7 +30,8 @@ export class TrainingService {
     description: string,
     userId: string,
   ): Training {
-    const [training, index] = this.findTraining(trainingId);
+    this.userService.findUser(userId);
+    const [training] = this.findTraining(trainingId);
 
     if (description) {
       training.description = description;
@@ -40,7 +44,7 @@ export class TrainingService {
   }
 
   deleteTraining(trainingId: string) {
-    const [training, index] = this.findTraining(trainingId);
+    const [, index] = this.findTraining(trainingId);
     this.training.splice(index, 1);
     return { message: 'Uspjesno obrisano' };
   }
@@ -50,8 +54,8 @@ export class TrainingService {
       (training) => training.id === id,
     );
     if (trainingIndex === -1) {
-      throw new NotFoundException(`Child with ID ${id} not found`);
+      throw new NotFoundException(`Training with ID ${id} not found`);
     }
-    return [this.training[this.trainingIndex], this.trainingIndex];
+    return [this.training[trainingIndex], trainingIndex];
   }
 }

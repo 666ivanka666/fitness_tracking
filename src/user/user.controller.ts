@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto';
-import { IdDto, NameDto } from 'src/common/decorators';
+import { IdDto } from 'src/common/decorators';
 import { User } from './type';
 
 @Controller('user')
@@ -29,21 +29,19 @@ export class UserController {
   getAllUsers(): User[] {
     return this.userService.getUser();
   }
+
   @Get(':id')
   getUserById(@Param() params: IdDto): User {
     const { id } = params;
     return this.userService.getSingleUser(id);
   }
-  @Get('name/name')
-  getUserByName(@Param() params: NameDto): User[] {
-    const { name } = params;
-    return this.userService.getUser().filter((user) => user.firstName === name);
-  }
+
   @Put(':id')
   updateUser(@Param() params: IdDto, @Body() body: UserDto): User {
     const { id } = params;
     return this.userService.updateUser(id, body.firstName, body.firstName);
   }
+
   @Delete(':id')
   deleteUserById(@Param() params: IdDto): { message: string } {
     return this.userService.deleteUser(params.id);

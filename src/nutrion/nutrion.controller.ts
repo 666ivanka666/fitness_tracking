@@ -10,11 +10,10 @@ import {
 import { NutritionService } from './nutrion.service';
 import { NutritionDto } from './dto';
 import { Nutrition } from './type';
-import { IdDto, NameDto } from 'src/common/decorators';
+import { IdDto } from 'src/common/decorators';
 
-@Controller('nutrion')
+@Controller('nutrition')
 export class NutrionController {
-  nutrition: any;
   constructor(private readonly nutritionService: NutritionService) {}
 
   @Post()
@@ -28,23 +27,12 @@ export class NutrionController {
   }
   @Get()
   getAllNutrition(): Nutrition[] {
-    return this.nutritionService
-      .getNutrition()
-      .filter((nutrition) => this.nutrition.acitve);
+    return this.nutritionService.getNutrition();
   }
 
   @Get(':id')
   getNutritionById(@Param() params: IdDto): Nutrition {
-    const { id } = params;
     return this.nutritionService.getSingleNutrition(params.id);
-  }
-
-  @Get('name/name')
-  getNutritionByName(@Param() params: NameDto): Nutrition[] {
-    const { name } = params;
-    return this.nutritionService
-      .getNutrition()
-      .filter((nutrition) => this.nutrition.name === name);
   }
 
   @Put(':id')

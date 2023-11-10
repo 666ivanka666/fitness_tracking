@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotAcceptableException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import { User } from './type';
 
@@ -36,7 +32,7 @@ export class UserService {
     return user;
   }
   deleteUser(userId: string) {
-    const [user, index] = this.findUser(userId);
+    const [, index] = this.findUser(userId);
     this.user.splice(index, 1);
     return { message: 'Uspijesno obrisano' };
   }
