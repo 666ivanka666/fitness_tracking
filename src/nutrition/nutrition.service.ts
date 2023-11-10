@@ -13,19 +13,19 @@ export class NutritionService {
   ) {}
 
   insertNutrition(
-    descritpion: string,
+    description: string,
     userId: string,
     trainingId: string,
   ): string {
-    const nutritonId = uuidv4();
+    const nutritionId = uuidv4();
 
     this.userService.findUser(userId);
     this.trainingService.findTraining(trainingId);
 
     this.nutrition.push(
-      new Nutrition(nutritonId, descritpion, userId, trainingId),
+      new Nutrition(nutritionId, description, userId, trainingId),
     );
-    return nutritonId;
+    return nutritionId;
   }
 
   getNutrition(): Nutrition[] {
@@ -38,7 +38,7 @@ export class NutritionService {
   }
 
   updateNutrition(
-    nutritonId: string,
+    nutritionId: string,
     description: string,
     userId: string,
     trainingId: string,
@@ -46,22 +46,22 @@ export class NutritionService {
     this.userService.findUser(userId);
     this.trainingService.findTraining(trainingId);
 
-    const [nutriton] = this.findNutrition(nutritonId);
+    const [nutrition] = this.findNutrition(nutritionId);
 
     if (description) {
-      nutriton.description = description;
+      nutrition.description = description;
     }
     if (userId) {
-      nutriton.userId = userId;
+      nutrition.userId = userId;
     }
     if (trainingId) {
-      nutriton.trainingId = trainingId;
+      nutrition.trainingId = trainingId;
     }
-    return nutriton;
+    return nutrition;
   }
 
-  deleteNutrition(nutrionId: string) {
-    const [, index] = this.findNutrition(nutrionId);
+  deleteNutrition(nutritionId: string) {
+    const [, index] = this.findNutrition(nutritionId);
     this.nutrition.splice(index, 1);
     return { message: 'Uspiješno obrisano' };
   }

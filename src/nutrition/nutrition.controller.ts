@@ -7,13 +7,13 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { NutritionService } from './nutrion.service';
+import { NutritionService } from './nutrition.service';
 import { NutritionDto } from './dto';
 import { Nutrition } from './type';
 import { IdDto } from 'src/common/decorators';
 
 @Controller('nutrition')
-export class NutrionController {
+export class NutritionController {
   constructor(private readonly nutritionService: NutritionService) {}
 
   @Post()

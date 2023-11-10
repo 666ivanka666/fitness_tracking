@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { NutritionService } from './nutrion.service';
-import { NutrionController } from './nutrion.controller';
+import { NutritionService } from './nutrition.service';
+import { NutritionController } from './nutrition.controller';
 import { TrainingModule } from 'src/training/training.module';
 import { UserModule } from 'src/user/user.module';
 
 @Module({
   imports: [TrainingModule, UserModule],
-  controllers: [NutrionController],
+  controllers: [NutritionController],
   providers: [NutritionService],
 })
-export class NutrionModule {}
+export class NutritionModule {}
